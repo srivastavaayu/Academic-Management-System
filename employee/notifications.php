@@ -42,11 +42,9 @@
                                         </div>
                                         <div class="modal-body text-left">
                                             <form action="" name="form1" method="POST">
-                                                <div>
-                                                    <div class="form-check">
-                                                        <label for="input-target2" class="form-check-label">Student</label>
-                                                        <input id="input-target2" class="form-check-input" value="student" type="checkbox" name="target">
-                                                    </div>
+                                                <div class="form-check">
+                                                    <label for="input-target2" class="form-check-label">Student</label>
+                                                    <input id="input-target2" class="form-check-input" value="student" type="checkbox" name="target-student">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input-notiftitle">Notification Title</label>

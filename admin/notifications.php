@@ -50,14 +50,18 @@
                                         </div>
                                         <div class="modal-body text-left">
                                             <form action="" name="form1" method="POST">
-                                                <div>
+                                                <label for="target">Target Audience</label>
+                                                <div id="target">
                                                     <div class="form-check">
+                                                        <input id="input-target1" class="form-check-input" value="employee" type="checkbox" name="target-employee">
                                                         <label for="input-target1" class="form-check-label">Employee</label>
-                                                        <input id="input-target1" class="form-check-input" value="employee" type="checkbox" name="target">
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input id="input-target2" class="form-check-input" value="student" type="checkbox" name="target-student">
                                                         <label for="input-target2" class="form-check-label">Student</label>
-                                                        <input id="input-target2" class="form-check-input" value="student" type="checkbox" name="target">
                                                     </div>
                                                 </div>
+                                                <br>
                                                 <div class="form-group">
                                                     <label for="input-notiftitle">Notification Title</label>
                                                     <input id="input-notiftitle" class="form-control" type="text" name="notiftitle" required>
