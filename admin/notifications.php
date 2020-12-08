@@ -96,6 +96,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-start">#</th>
+                                        <th>Notifier</th>
                                         <th>Notified</th>
                                         <th>Notification Title</th>
                                         <th>Notification Description</th>
@@ -108,29 +109,36 @@
                                     while($row=mysqli_fetch_array($result, MYSQLI_NUM)){
                                 ?>
                                     <tr>
-                                        <td><?php echo $count;?></td>
                                         <?php
-                                          $target="";
-                                          if($row[3]==1){
-                                              $target="Employee,Student";
-                                          }elseif($row[3]==2){
-                                            $target="Employee";
-                                          }elseif($row[3]==3){
-                                            $target="Student";
-                                          }
-
+                                            $target="";
+                                            if($row[3]==1){
+                                                $target="Employee, Student";
+                                            }
+                                            elseif($row[3]==2){
+                                                $target="Employee";
+                                            }
+                                            elseif($row[3]==3){
+                                                $target="Student";
+                                            }
                                         ?>
+                                        <td><?php echo $count;?></td>
+                                        <td><?php echo $row[2];?></td>
                                         <td><?php echo $target;?></td>
                                         <td><?php echo $row[4];?></td>
                                         <td><?php echo $row[5];?></td>
                                         <?php
                                             if($row[1]==1){
-                                                ?>
-                                                <td><a type="button" class="btn btn-outline-danger" href="delete_notifications.php?id=<?php echo $row[0];?>">Delete</a></td>
-                                                <?php
+                                        ?>
+                                                <td><a type="button" class="btn btn-outline-danger" href="delete_notification.php?id=<?php echo $row[0];?>">Delete</a></td>
+                                        <?php
+                                            }
+                                            else{
+                                        ?>
+                                                <td></td>
+                                        <?php
                                             }
                                         ?>
-                                        
+
                                     </tr>
                                 <?php
                                         $count=$count+1;
@@ -152,35 +160,29 @@
 ?>
 
 <?php
- if(isset($_POST["submit-notif"])){
-     //echo "working";
-     $student=isset($_POST['target-student']);
-     $employee=isset($_POST['target-employee']);
-    //echo $employee;
-    //echo $student;
-    //echo $_POST["notiftitle"];
-    //echo $_POST["notifdesc"];
-    $sql="";
-    if($student==1 and $employee==1){
-        $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','1','$_POST[notiftitle]','$_POST[notifdesc]')";
-    }elseif($employee==1){
-        $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','2','$_POST[notiftitle]','$_POST[notifdesc]')";
-    }
-    elseif($student==1){
-        $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','3','$_POST[notiftitle]','$_POST[notifdesc]')";
-    }
-
-    $result=$mysqli->query($sql);
-    if($result === TRUE) {
-    ?>
-    <script type="text/javascript">
-        alert("New Notification added");
-        window.location.href=window.location.href;
-    </script>
-    <?php
+    if(isset($_POST["submit-notif"])){
+        $student=isset($_POST['target-student']);
+        $employee=isset($_POST['target-employee']);
+        $sql="";
+        if($student==1 and $employee==1){
+            $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','1','$_POST[notiftitle]','$_POST[notifdesc]')";
+        }
+        elseif($employee==1){
+            $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','2','$_POST[notiftitle]','$_POST[notifdesc]')";
+        }
+        elseif($student==1){
+            $sql="INSERT INTO notification VALUE(NULL,'1','$_SESSION[userName]','3','$_POST[notiftitle]','$_POST[notifdesc]')";
+        }
+        $result=$mysqli->query($sql);
+        if($result === TRUE) {
+?>
+        <script type="text/javascript">
+            window.location.href=window.location.href;
+        </script>
+<?php
         }
         else {
-            echo "Error: ".$sql."<br>".$mysqli->error;
+                echo "Error: ".$sql."<br>".$mysqli->error;
         }
     }
 ?>

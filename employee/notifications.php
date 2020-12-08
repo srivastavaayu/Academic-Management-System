@@ -76,6 +76,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-start">#</th>
+                                        <th>Notifier</th>
                                         <th>Notified</th>
                                         <th>Notification Title</th>
                                         <th>Notification Description</th>
@@ -88,27 +89,38 @@
                                     while($row=mysqli_fetch_array($result, MYSQLI_NUM)){
                                 ?>
                                     <tr>
-                                        <td><?php echo $count;?></td>
-
                                         <?php
-                                          $target="";
-                                          if($row[3]==1){
-                                              $target="Employee,Student";
-                                          }elseif($row[3]==2){
-                                            $target="Employee";
-                                          }elseif($row[3]==3){
-                                            $target="Student";
+                                            $notifier="";
+                                            $target="";
+                                            if($row[3]==1){
+                                                $notifier="$row[2]";
+                                                $target="Employee";
+                                            }
+                                            elseif($row[3]==2){
+                                                $notifier="$row[2]";
+                                                $target="Employee";
+                                            }
+                                            elseif($row[3]==3){
+                                                $notifier="$row[2]";
+                                                $target="Student";
                                           }
 
                                         ?>
+                                        <td><?php echo $count;?></td>
+                                        <td><?php echo $notifier;?></td>
                                         <td><?php echo $target;?></td>
                                         <td><?php echo $row[4];?></td>
                                         <td><?php echo $row[5];?></td>
                                         <?php
                                             if($row[1]==2){
-                                                ?>
-                                                <td><a type="button" class="btn btn-outline-danger" href="delete_notifications.php?id=<?php echo $row[0];?>">Delete</a></td>
-                                                <?php
+                                        ?>
+                                                <td><a type="button" class="btn btn-outline-danger" href="delete_notification.php?id=<?php echo $row[0];?>">Delete</a></td>
+                                        <?php
+                                            }
+                                            else {
+                                        ?>
+                                                <td></td>
+                                        <?php
                                             }
                                         ?>
                                     </tr>
@@ -139,7 +151,6 @@
     if($result === TRUE) {
     ?>
     <script type="text/javascript">
-        alert("New Notification added");
         window.location.href=window.location.href;
     </script>
     <?php

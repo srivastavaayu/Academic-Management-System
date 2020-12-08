@@ -189,13 +189,13 @@
                                         <td><?php
                                         if(strpos($row[7],'opt_images/')!==FALSE){
                                             ?>
-                                              <a type="button" class="btn btn-outline-warning" href="edit_option_images.php?id=<?php echo $row[0];?>&id1=<?php echo $id;?>">Edit</a>
+                                              <a type="button" class="btn btn-outline-warning" href="edit_image_question.php?id=<?php echo $row[0];?>&id1=<?php echo $id;?>">Edit</a>
                                             <?php
                                         }
                                         else{
 
                                             ?>
-                                              <a type="button" class="btn btn-outline-warning" href="edit_option.php?id=<?php echo $row[0];?>&id1=<?php echo $id;?>">Edit</a>
+                                              <a type="button" class="btn btn-outline-warning" href="edit_question.php?id=<?php echo $row[0];?>&id1=<?php echo $id;?>">Edit</a>
                                             <?php
 
 
@@ -222,7 +222,6 @@
 ?>
 <?php
     if(isset($_POST['submit-question']) and ($_POST['question-type']=='Question with text options')){
-        //echo "testing";
         $loop=0;
         $count=0;
         $sql="SELECT * FROM question WHERE category='$exam_category' ORDER BY id ASC";
@@ -242,7 +241,6 @@
         $sql="INSERT INTO question VALUES(NULL,'$loop','$_POST[question]','$_POST[opt1]','$_POST[opt2]','$_POST[opt3]','$_POST[opt4]','$_POST[answer]','$exam_category')";
         $result=$mysqli->query($sql);
         if($result==TRUE){
-            //work properly;
             ?>
             <script type="text/javascript">
                 window.location=window.location;
@@ -253,7 +251,6 @@
         }
     }
     elseif(isset($_POST['submit-question']) and ($_POST['question-type']=="Question with image options")){
-        //echo "testing...";
         $loop=0;
         $count=0;
         $sql="SELECT * FROM question WHERE category='$exam_category' ORDER BY id ASC";
@@ -272,32 +269,26 @@
         $loop=$loop+1;
         $tm=md5(time());
 
-        // option 1
         $fnm1=$_FILES["opt1"]["name"];
-        //echo $fnm1;
         $dst1="../employee/opt_images/".$tm.$fnm1;
         $dst_db1="opt_images/".$tm.$fnm1;
         move_uploaded_file($_FILES["opt1"]["tmp_name"],$dst1);
 
-        //option 2
         $fnm2=$_FILES["opt2"]["name"];
         $dst2="../employee/opt_images/".$tm.$fnm2;
         $dst_db2="opt_images/".$tm.$fnm2;
         move_uploaded_file($_FILES["opt2"]["tmp_name"],$dst2);
 
-        //option 3
         $fnm3=$_FILES["opt3"]["name"];
         $dst3="../employee/opt_images/".$tm.$fnm3;
         $dst_db3="opt_images/".$tm.$fnm3;
         move_uploaded_file($_FILES["opt3"]["tmp_name"],$dst3);
 
-        //option 4
         $fnm4=$_FILES["opt4"]["name"];
         $dst4="../employee/opt_images/".$tm.$fnm4;
         $dst_db4="opt_images/".$tm.$fnm4;
         move_uploaded_file($_FILES["opt4"]["tmp_name"],$dst4);
 
-        //correct option
         $fnm5=$_FILES["answer"]["name"];
         $dst5="../employee/opt_images/".$tm.$fnm5;
         $dst_db5="opt_images/".$tm.$fnm5;
