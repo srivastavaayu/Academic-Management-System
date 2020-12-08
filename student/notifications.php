@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-12">
                         <?php
-                            $sql="SELECT * FROM admin_login WHERE admin=0 ORDER BY id ASC";
+                            $sql="SELECT * FROM notification ORDER BY id DESC";
                             $result=$mysqli->query($sql);
                             $row_count=mysqli_num_rows($result);
                             if($row_count==0) {
@@ -34,10 +34,9 @@
                                 <thead>
                                     <tr>
                                         <th class="text-start">#</th>
-                                        <th>Notified</th>
+                                        <th>Notifier</th>
                                         <th>Notification Title</th>
                                         <th>Notification Description</th>
-                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,10 +46,9 @@
                                 ?>
                                     <tr>
                                         <td><?php echo $count;?></td>
-                                        <td><?php echo $row[1];?></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><a type="button" class="btn btn-outline-danger" href="delete_user.php?id=<?php echo $row[0];?>&user=0">Delete</a></td>
+                                        <td><?php echo $row[2];?></td>
+                                        <td><?php echo $row[4];?></td>
+                                        <td><?php echo $row[5];?></td>
                                     </tr>
                                 <?php
                                         $count=$count+1;

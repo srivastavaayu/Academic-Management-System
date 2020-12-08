@@ -42,10 +42,6 @@
                                         </div>
                                         <div class="modal-body text-left">
                                             <form action="" name="form1" method="POST">
-                                                <div class="form-check">
-                                                    <label for="input-target2" class="form-check-label">Student</label>
-                                                    <input id="input-target2" class="form-check-input" value="student" type="checkbox" name="target-student">
-                                                </div>
                                                 <div class="form-group">
                                                     <label for="input-notiftitle">Notification Title</label>
                                                     <input id="input-notiftitle" class="form-control" type="text" name="notiftitle" required>
@@ -65,7 +61,7 @@
                         </div>
                         <div class="col-12">
                         <?php
-                            $sql="SELECT * FROM admin_login WHERE admin=0 ORDER BY id ASC";
+                            $sql="SELECT * FROM notification ORDER BY id DESC";
                             $result=$mysqli->query($sql);
                             $row_count=mysqli_num_rows($result);
                             if($row_count==0) {
@@ -93,10 +89,28 @@
                                 ?>
                                     <tr>
                                         <td><?php echo $count;?></td>
-                                        <td><?php echo $row[1];?></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><a type="button" class="btn btn-outline-danger" href="delete_user.php?id=<?php echo $row[0];?>&user=0">Delete</a></td>
+
+                                        <?php
+                                          $target="";
+                                          if($row[3]==1){
+                                              $target="Employee,Student";
+                                          }elseif($row[3]==2){
+                                            $target="Employee";
+                                          }elseif($row[3]==3){
+                                            $target="Student";
+                                          }
+
+                                        ?>
+                                        <td><?php echo $target;?></td>
+                                        <td><?php echo $row[4];?></td>
+                                        <td><?php echo $row[5];?></td>
+                                        <?php
+                                            if($row[1]==2){
+                                                ?>
+                                                <td><a type="button" class="btn btn-outline-danger" href="delete_notifications.php?id=<?php echo $row[0];?>">Delete</a></td>
+                                                <?php
+                                            }
+                                        ?>
                                     </tr>
                                 <?php
                                         $count=$count+1;
@@ -115,4 +129,23 @@
             <!--End Main Content-->
 <?php
     include "footer.php";
+?>
+
+
+<?php
+ if(isset($_POST["submit-notif"])){
+    $sql="INSERT INTO notification VALUE(NULL,'2','$_SESSION[userName]','3','$_POST[notiftitle]','$_POST[notifdesc]')";
+    $result=$mysqli->query($sql);
+    if($result === TRUE) {
+    ?>
+    <script type="text/javascript">
+        alert("New Notification added");
+        window.location.href=window.location.href;
+    </script>
+    <?php
+        }
+        else {
+            echo "Error: ".$sql."<br>".$mysqli->error;
+        }
+    }
 ?>

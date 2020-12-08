@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="float-left">Question: <span id="current_que"></span>/<span id="total_que"></span></div>
-                            <div class="float-right text-right">Examination Name: <br>Remaining Time: <span id="countdowntimer"></span></div>
+                            <div class="float-right text-right">Examination Name: <?php echo $_SESSION["exam_category"];?><br>Remaining Time: <span id="countdowntimer"></span></div>
                         </div>
                         <div class="col-12 text-justify question" id="load_question"></div>
                         <div class="col-12"><br><br></div>
