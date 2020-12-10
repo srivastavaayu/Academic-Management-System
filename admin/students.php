@@ -99,7 +99,7 @@
                                     <tr>
                                         <td><?php echo $count;?></td>
                                         <td><?php echo $row[1];?></td>
-                                        <td><a type="button" class="btn btn-outline-warning" href="edit_user.php?id=<?php echo $row[0];?>&user=1">Edit</a></td>
+                                        <td><a type="button" class="btn btn-outline-warning" href="edit_student.php?id=<?php echo $row[0];?>">Edit</a></td>
                                         <td><a type="button" class="btn btn-outline-danger" href="delete_user.php?id=<?php echo $row[0];?>&user=1">Delete</a></td>
                                     </tr>
                                 <?php

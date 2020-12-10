@@ -34,7 +34,7 @@
             $opt4=$row[6];
         }
         ?>
-        <h5><?php echo $question_no?>.<?php echo $question?></h5>
+        <h5><?php echo $question_no?>.  <?php echo $question?></h5>
         <input type="radio" name="ri" value="<?php echo $opt1;?>" onclick="radioclick(this.value,<?php echo $question_no?>)"
         <?php
             if($ans==$opt1){
